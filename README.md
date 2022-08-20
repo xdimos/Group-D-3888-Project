@@ -2,7 +2,7 @@
 
 Think of this as the "front page" for our project. As it grows we should fill out this page as a reference and a record of progress.
 
-I apologies for the terrible state of my code...
+I apologise for the terrible state of my code...
 
 ## Aim
 
