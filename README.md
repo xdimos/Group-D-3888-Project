@@ -10,6 +10,17 @@ I apologise for the terrible state of my code...
 
 The homologs of WRAP53 in yeast are RSA4 "YCR072C" and TAF5 "YBR198C".
 
+#### Proteins from Week 3 (Sunday):
+TP63 - tumour protein 63<br>
+associated with aggressive form of pancreatic cancer<br>
+pancreatic ductal adenocarcinoma<br>
+PDAC<br>
+BUD16<br>
+BUD17<br>
+UBX3 <- might be very important<br>
+Identifier (YDL091C)
+
+
 ## Pretty Pictures
 Until we have anything else to put here, enjoy some pretty pictures :P
 
