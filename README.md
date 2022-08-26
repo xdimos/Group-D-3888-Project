@@ -28,7 +28,23 @@ Identifier (YDL091C)
 </p>
 Looking for things to knock out we are therefore looking for relatively low degree nodes.
 
+#### Week 5 project proposal - Maths
+##### Scheme
+ - Recieve key proteins from BCMB students
+ - Locate community [Louvain, etc.]
+ - (maybe?) pare down to smaller key structures?
+ - Centrality (pathway?) analysis on community
+ - Pick target nodes with a cost function optimising for minimal degree <=> lethality
 
+Dual passes with and without essential proteins--how does this effect the structure of the community finding:<br><br>
+E.g. <em><b>Essential removed before community finding:</b></em>
+<p align="center">
+  <img style="display: block; margin-left: auto; margin-right: auto; width: 70%;" alt="Neighbourhood of YCR072C, the WRAP53 homolog in yeast." src="https://user-images.githubusercontent.com/34012884/186800221-395bcf8c-c6b7-43f2-afdd-f049adda39bd.png">
+</p>
+vs. <em><b>Essential removed after community finding:</b></em>
+<p align="center">
+  <img style="display: block; margin-left: auto; margin-right: auto; width: 70%;" alt="Neighbourhood of YCR072C, the WRAP53 homolog in yeast." src="https://user-images.githubusercontent.com/34012884/186800500-9631017c-3dda-4693-a53b-7534b45a949c.png">
+</p>
 
 ## Pretty Pictures
 Until we have anything else to put here, enjoy some pretty pictures :P
