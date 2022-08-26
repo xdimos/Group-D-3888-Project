@@ -30,11 +30,14 @@ Looking for things to knock out we are therefore looking for relatively low degr
 
 #### Week 5 project proposal - Maths
 ##### Scheme
- - Recieve key proteins from BCMB students
+ - Recieve key proteins from BCMB students. In particular we are concerned with <em>sources</em> (of metabolites etc.) and <em>targets</em> (e.g. growth protein)
  - Locate community [Louvain, etc.]
- - (maybe?) pare down to smaller key structures?
- - Centrality (pathway?) analysis on community
- - Pick target nodes with a cost function optimising for minimal degree <=> lethality
+ - Analyse centrality (cross check with different measures) [subgraph more lethal, different to degree centrality, cite paper] (pathway?) analysis on community
+ - Look for weakly connected alternate pathways (avoiding central nodes), targeting to modulate expression of target.
+   - specialise pathway to cancer(?)
+ - approach to essential nodes: include for structure, avoid in selecting pathways/nodes.
+ - Pick target nodes with a cost function optimising for minimal degree <=> lethality [cite], and cut number. Essential nodes have a high cost.
+
 
 Dual passes with and without essential proteins--how does this effect the structure of the community finding:<br><br>
 E.g. <em><b>Essential removed before community finding:</b></em>
