@@ -36,7 +36,7 @@ Looking for things to knock out we are therefore looking for relatively low degr
  - Look for weakly connected alternate pathways (avoiding central nodes), targeting to modulate expression of target.
    - specialise pathway to cancer(?)
  - approach to essential nodes: include for structure, avoid in selecting pathways/nodes.
- - Pick target nodes with a cost function optimising for minimal degree <=> lethality [cite], and cut number. Essential nodes have a high cost.
+ - Pick target nodes with a cost function optimising for minimal degree <=> lethality [cite], and cut number. Essential nodes have a high cost. Subgraph centrality is best prediction method we have so far.
 
 
 Dual passes with and without essential proteins--how does this effect the structure of the community finding:<br><br>
@@ -55,3 +55,13 @@ Until we have anything else to put here, enjoy some pretty pictures :P
 <p align="center">
   <img style="display: block; margin-left: auto; margin-right: auto; width: 75%;" alt="Neighbourhood of YCR072C, the WRAP53 homolog in yeast." src="https://user-images.githubusercontent.com/34012884/185737294-9e32ced4-31d7-4875-8ceb-0b99f2681cd3.png">
 </p>
+
+## Freyas notes - subgraph centrality paper
+- subgraph centrality measures the number of connected graphs the node takes part in, giving more weight to smaller nodes.
+- It is more discriminative than other measures, and produces a different ranking of nodes. However, still yields highest rank for nodes with largest degree, disagrees on majority of other nodes.
+- The node with highest subgraph centrality would be one in a complete network (everything connected to everything)
+- After testing with the yeast dataset, ranking with subgraph centrality better predicts essential nodes compared to dc
+- biomed theory for this: duplication-divergence model of evolution, triangles are formed among duplicating genes and any neighbour of the parent gene, squares with duplicating genes and any pair of neighbours.
+- Part about scaling properties is largely about the small-world model which I don't understand :( will read and report back!
+- Apparently shows a power-law distribution even when dc does not display scale free distribution?
+
