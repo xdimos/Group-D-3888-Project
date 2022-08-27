@@ -21,17 +21,26 @@ def trim(protein_name):
             trimmed_list.append(trim(name))
         return trimmed_list
 
-# A simple QoL function to cut down a network to a given nodelist
+# A simple QoL function to cut down a network to a given nodelist (as opposed to the converse, which nx supplies)
 def cutdown_network(graph, nodelist):
     graph_copy = graph.copy(); # just to allow modification
     nodes_to_remove = set(graph.nodes) - nodelist;
     graph_copy.remove_nodes_from(nodes_to_remove)
     return graph_copy
     
-# My custom drawing function, with all my prefered defaults set. Useful general functions like this should probably be broken
-# out into their own documents-to-be-included.
-def my_draw(graph, with_labels=False, kkl=False, color_by_weight=True, node_color="Blue", node_size=10, alpha=0.8,
-            key_text=None, title_text=None):
+# My custom drawing function, with all my prefered defaults set. 
+def my_draw(graph, # The networkx network to be plotted
+            with_labels=False, # whether to include node labels. Can get very messy.
+            kkl=False, # whether to use Kamada Kawai algorithm for layout. Looks nice, but is (much) slower
+            color_by_weight=True, # Edge colors by confidence weight. 
+                                  # ...Most of the nice things here assume this is True. Turn off at your peril... plus it looks pretty :P
+            node_color="Blue", # Either a single string "Blue", "b", "r", or a list of the colors of individual node colors in order
+            node_size=10, # Similar to above
+            alpha=0.8, # The _node_ opacity. Similar to above (single value or list). Note that this will be modulated
+            key_text=None, # Text at the bottom of the figure
+            title_text=None, # Text above figure
+            delay_show=False): # whether to not run plt.show() at end. Use this if you want to include more matplotlib details,
+                               # or with to run nu.draw_path_from_nodes(...) - see below 
     # "make a new figure"
     network_fig = plt.figure(figsize=(12,12))
     # Pick the layout option. At the moment I just have KK or spring. KK is much more time-intensive.
@@ -45,7 +54,12 @@ def my_draw(graph, with_labels=False, kkl=False, color_by_weight=True, node_colo
         weights = [graph[u][v]['weight'] for u,v in edges]
         # Pick the colormap here if you like!
         cmap=plt.cm.plasma;
-    
+        # TODO 
+        labels = None;
+        if (with_labels):
+            list_labels = list(graph.nodes);
+            labels = {l : l for l in list_labels}
+            nx.draw_networkx_labels(graph, my_layout, labels=labels, font_size=6)
         nx.draw_networkx_nodes(graph, pos=my_layout, node_size=node_size, alpha=alpha, node_color=node_color)
         nx.draw_networkx_edges(graph, pos=my_layout, edge_color=weights, edge_cmap=cmap, width=0.2)
 
@@ -63,4 +77,21 @@ def my_draw(graph, with_labels=False, kkl=False, color_by_weight=True, node_colo
     if (title_text is not None):
         plt.title(title_text);
     # "show the figure"
-    plt.show();
+    if (delay_show is False): plt.show();
+    return my_layout;
+
+#
+# draws a path on an existing network plot, from a ordered node list. 
+# !! If using this with nu.my_draw(...), make sure to set delay_show=True to avoid matplotlib plt.show()-ing the figure. !!
+# 'pos' is a network layout (i.e. what is returned by nx.spring_layout(graph); and the like)
+# 'node_list' is a list of the node names, in order of the path. 
+# '**textkwargs' are keyword arguments passed with the plt.text call - e.g. font size.
+#
+def draw_path_from_nodes(pos, node_list, with_labels=False, color='r', **textkwargs):
+    xs = [list(pos[node])[0] for node in node_list]
+    ys = [list(pos[node])[1] for node in node_list]
+    plt.plot(xs,ys, color=color)
+    for i in range(len(xs)):
+        plt.text(xs[i],ys[i], node_list[i], textkwargs)
+    
+    
