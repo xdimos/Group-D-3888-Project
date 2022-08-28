@@ -20,14 +20,6 @@ BUD17<br>
 UBX3 <- might be very important<br>
 Identifier (YDL091C)
 
-#### <a href="https://www.nature.com/articles/35075138">Lethality and centrality in protein networks [H. Jeong, 2001]</a>
-<a href="https://edstem.org/au/courses/9294/resources?download=14255">(EdStem download)</a><br>
-<em>Summary</em>: in yeast, more connected proteins are more lethal when knocked out. Hence our desire to avoid knocking out essential nodes. <br><br>The degree distribution is roughly scale free Examine for our network:
-<p align="center">
-  <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" alt="Log-log degree distribution for yeast." src="https://user-images.githubusercontent.com/34012884/186669141-8929599c-6a06-4d4d-9bef-7bf6832a6b65.png">
-</p>
-Looking for things to knock out we are therefore looking for relatively low degree nodes.
-
 #### Week 5 project proposal - Maths
 ##### Scheme
  - Recieve key proteins from BCMB students. In particular we are concerned with <em>sources</em> (of metabolites etc.) and <em>targets</em> (e.g. growth protein)
@@ -102,3 +94,11 @@ Until we have anything else to put here, enjoy some pretty pictures :P
   - Most prominently, Guimerà and Amaral (2005) calculated the properties of nodes within communities found in twelve different organisms through their within-module degree ($i$, which represented its connectedness within its community) and their participation ratio ($P_i$, which represented the link distribution across all communities).
     - By comparing the z-scores ($z_i$) and $P_i$ of nodes, they found that *non-hub connector nodes* (with low $z_i$, moderately high $P_i$, and indicated preferential connectivity to a subset of the network's communities) didn't appear as frequently as *provincial hubs* (with high $z_i$ and low $P_i$).
 - Many community-finding algorithms exist, but research so far (at the time this paper was published) focused on formulating fast and generally accurate community-finding algorithms. Few algorithms exist to handle directed or signed networks (an example of signed networks appears in Potts Method), as well as algorithms that can work with interval ranges rather than precise values and other networks that are time-dependent or parameter-dependent.
+
+## <a href="https://www.nature.com/articles/35075138">Lethality and centrality in protein networks [H. Jeong, 2001]</a>
+<a href="https://edstem.org/au/courses/9294/resources?download=14255">(EdStem download)</a><br>
+<em>Summary</em>: in yeast, more connected proteins are more lethal when knocked out. Hence our desire to avoid knocking out essential nodes. <br><br>The degree distribution is roughly scale free Examine for our network:
+<p align="center">
+  <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" alt="Log-log degree distribution for yeast." src="https://user-images.githubusercontent.com/34012884/186669141-8929599c-6a06-4d4d-9bef-7bf6832a6b65.png">
+</p>
+Looking for things to knock out we are therefore looking for relatively low degree nodes.
