@@ -66,7 +66,7 @@ Until we have anything else to put here, enjoy some pretty pictures :P
 - Apparently shows a power-law distribution even when dc does not display scale free distribution?
 
 ## Yin En's Notes - Community Finding paper
-### <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1357925">Communities in Networks - [Porter et al., 2009]</a> (Yin En Chin)
+### <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1357925">Communities in Networks - [Porter et al., 2009]</a>
 - The rationale behind community finding is based on the mesoscopic (i.e. intermediate structures, between macro/micro worlds) and arose from sociology, in an attempt to map the relationship between "micro" groups and "macro" patterns.
   - Specifically, this took off in 2002 once Michelle Girvan and Mark Newman researched graph-partitionining problems. It kicked off attempts to solve these problems through community finding among physicists and applied mathematicians.
 - Communities are context-specific and the process of identifying them is inherently interdisciplinary, but is problematised by the way each discipline will often formulate communities in a domain-specific manner.
