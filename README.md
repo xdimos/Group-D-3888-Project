@@ -1,4 +1,4 @@
-# Math/BCMB3888-D: Yeast models of ???
+# Math/BCMB3888-D: Yeast models of Glioblastoma 
 
 Think of this as the "front page" for our project. As it grows we should fill out this page as a reference and a record of progress.
 
