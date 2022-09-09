@@ -52,7 +52,7 @@ Until we have anything else to put here, enjoy some pretty pictures :P
 
 As of week 6, our protein targets are the yeast homologues (blue) of the following human genes (black):
 
-To find the identifier (e.g. "YBR247C") from the name ("ENP1") search the name in [string-db.com](https://string-db.org/), press continue, then click on the relavent protein in the network, and look at the identifier listed in the popup.
+To find the identifier (e.g. "YBR247C") from the name ("ENP1") search the name in [string-db.org](https://string-db.org/), press continue, then click on the relavent protein in the network, and look at the identifier listed in the popup.
 
 <p align="center">
   <img style="display: block; margin-left: auto; margin-right: auto; width: 70%;" alt="Week 6 target proteins" src="https://user-images.githubusercontent.com/34012884/189261954-7ce987c4-1cbd-4946-abfc-d853642beb71.png">
