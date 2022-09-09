@@ -48,6 +48,14 @@ Until we have anything else to put here, enjoy some pretty pictures :P
   <img style="display: block; margin-left: auto; margin-right: auto; width: 75%;" alt="Neighbourhood of YCR072C, the WRAP53 homolog in yeast." src="https://user-images.githubusercontent.com/34012884/185737294-9e32ced4-31d7-4875-8ceb-0b99f2681cd3.png">
 </p>
 
+## Target proteins - Week 6
+
+As of week 6, our protein targets are the yeast homologues (blue) of the following human genes (black):
+
+<p align="center">
+  <img style="display: block; margin-left: auto; margin-right: auto; width: 70%;" alt="Week 6 target proteins" src="https://user-images.githubusercontent.com/34012884/189261954-7ce987c4-1cbd-4946-abfc-d853642beb71.png">
+</p>
+
 ## Freyas notes - subgraph centrality paper
 - subgraph centrality measures the number of connected graphs the node takes part in, giving more weight to smaller nodes.
 - It is more discriminative than other measures, and produces a different ranking of nodes. However, still yields highest rank for nodes with largest degree, disagrees on majority of other nodes.
