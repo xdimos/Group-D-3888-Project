@@ -24,7 +24,7 @@ def trim(protein_name):
 # A simple QoL function to cut down a network to a given nodelist (as opposed to the converse, which nx supplies)
 def cutdown_network(graph, nodelist):
     graph_copy = graph.copy(); # just to allow modification
-    nodes_to_remove = set(graph.nodes) - nodelist;
+    nodes_to_remove = set(graph.nodes) - set(nodelist);
     graph_copy.remove_nodes_from(nodes_to_remove)
     return graph_copy
     
