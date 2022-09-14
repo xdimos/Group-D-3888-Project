@@ -93,5 +93,23 @@ def draw_path_from_nodes(pos, node_list, with_labels=False, color='r', **textkwa
     plt.plot(xs,ys, color=color)
     for i in range(len(xs)):
         plt.text(xs[i],ys[i], node_list[i], textkwargs)
-    
+
+#
+# bit of an esoteric function. Takes a list of inputs, and creates a list consisting of given results, corresponding to whether each  
+# value returns true the corresponding boolean lambda test. ... feel free to ignore this!
+#
+def value_lambda_result(values, tests, results, default=0): 
+    # 'values' a list of inputs. 'tests' a boolean lambda function. 
+    # The first test to be satisfied returns its 'results'
+    # 'default' is returned otherwise.
+    # ...'results' can also contain lambdas, in which case, the lambda is evaluated on the corresp' value
+    output = [default for i in range(len(values))]
+    for v in range(len(values)):
+        for t in range(len(tests)):
+            if (tests[t](values[v])): 
+                if (callable(results[t])): output[v] = results[t](values[v])
+                else: output[v] = results[t]
+                break
+
+    return output
     
