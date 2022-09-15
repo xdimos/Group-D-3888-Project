@@ -30,7 +30,6 @@ def cutdown_network(graph, nodelist):
     
 # My custom drawing function, with all my prefered defaults set. 
 def my_draw(graph, # The networkx network to be plotted
-            with_labels=False, # whether to include node labels. Can get very messy.
             kkl=False, # whether to use Kamada Kawai algorithm for layout. Looks nice, but is (much) slower
             color_by_weight=True, # Edge colors by confidence weight. 
                                   # ...Most of the nice things here assume this is True. Turn off at your peril... plus it looks pretty :P
@@ -39,6 +38,11 @@ def my_draw(graph, # The networkx network to be plotted
             alpha=0.8, # The _node_ opacity. Similar to above (single value or list). Note that this will be modulated
             key_text=None, # Text at the bottom of the figure
             title_text=None, # Text above figure
+            
+            with_labels=False, # whether to include node labels. Can get very messy.
+            labels=None, # if with_labels is true, and this an array, then these labels are printed instead.
+            font_size=10,
+            
             delay_show=False): # whether to not run plt.show() at end. Use this if you want to include more matplotlib details,
                                # or with to run nu.draw_path_from_nodes(...) - see below 
     # "make a new figure"
@@ -55,11 +59,16 @@ def my_draw(graph, # The networkx network to be plotted
         # Pick the colormap here if you like!
         cmap=plt.cm.plasma;
         # TODO 
-        labels = None;
-        if (with_labels):
-            list_labels = list(graph.nodes);
-            labels = {l : l for l in list_labels}
-            nx.draw_networkx_labels(graph, my_layout, labels=labels, font_size=6)
+        these_labels = None;
+        if (with_labels and labels is None):
+            node_names = list(graph.nodes);
+            these_labels = {l : l for l in node_names} # note that we need to pass a dict not a list
+            nx.draw_networkx_labels(graph, my_layout, labels=these_labels, font_size=font_size)
+        elif (with_labels and labels is not None):
+            node_names = list(graph.nodes);
+            dict_labels = {node_names[l] : labels[l] for l in range(len(node_names))}
+            nx.draw_networkx_labels(graph, my_layout, labels=dict_labels, font_size=font_size)
+            
         nx.draw_networkx_nodes(graph, pos=my_layout, node_size=node_size, alpha=alpha, node_color=node_color)
         nx.draw_networkx_edges(graph, pos=my_layout, edge_color=weights, edge_cmap=cmap, width=0.2)
 
