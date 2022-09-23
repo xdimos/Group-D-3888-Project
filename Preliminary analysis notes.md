@@ -24,4 +24,8 @@ Essential Trimmed:
 The highest 5 subgraph central nodes are ['YPL188W', 'YPL262W', 'YPR001W', 'YPL245W', 'YPL099C']
 The highest 5 degree nodes are ['YPL188W', 'YPL262W', 'YPR001W', 'YPL245W', 'YPL099C']
 
-YGL026C is distinguished as a very high degree, low subgraph-central protein.
+#### YGL026C is distinguished as a very high degree, low subgraph-central protein:
+![image](https://user-images.githubusercontent.com/34012884/190552166-53e8cb16-3c5e-4739-a2b3-48901eb4c28b.png)
+
+#### Essential Node Trimmed network:
+![image](https://user-images.githubusercontent.com/34012884/190551588-48cff214-33b7-4138-b9a5-8171ffeba229.png)
