@@ -39,11 +39,15 @@ ggpairs(predictors)
 ```
 
 ```{r}
-data=net_measures%>%select(-X..Name)%>%clean_names()%>%mutate(essential = ifelse(essential==" True",1,0))
+data=net_measures%>%clean_names()%>%mutate(essential = ifelse(essential==" True",1,0))
 ```
 
 ```{r}
 data$essential = factor(data$essential)
+```
+
+```{r}
+head(data)
 ```
 
 
@@ -56,13 +60,19 @@ test1 <- data[-tr_index, ]
 test1$essential <- factor(test1$essential)
 head(test1)
 # train1.1 and test 1.1
-train1.1 <- train1 
-test1.1 <- test1
+train1.1 <- train1 %>%select(-x_name)
+test1.1 <- test1%>%select(-x_name)
 
 n_features <- length(setdiff(names(data), "essential"))
 
 ```
+```{r}
+train1.1
+```
 
+
+
+#test run
 ```{r}
 lethal_fit <- ranger(
   essential~.,
@@ -76,6 +86,8 @@ prediction_error <- test_run$prediction.error
 prediction_error
 ```
 
+
+# make grid for optimal parameters
 ```{r}
 hyper_grid <- expand.grid(
   mtry = floor(n_features * c(.05, .15, .25, .333, .4)),
@@ -105,14 +117,14 @@ hyper_grid %>%
   arrange(error) %>%
   head(10)
 ```
-
+optimal out of bag error is found by settin mtry=1,node size = 5, replace = FALSE, samp = 0.5
 ```{r}
 rf_impurity <- ranger(
   formula = essential ~., 
   data = train1.1,
   num.trees = 2000,
   mtry = 1,
-  min.node.size = 1,
+  min.node.size = 5,
   sample.fraction = .50,
   replace = FALSE,
   importance = "impurity",
@@ -125,7 +137,7 @@ rf_permute <- ranger(
   data = train1.1,
   num.trees = 2000,
   mtry = 1,
-  min.node.size = 1,
+  min.node.size = 5,
   sample.fraction = .50,
   replace = FALSE,
   importance = "permutation",
@@ -136,8 +148,8 @@ rf_permute <- ranger(
 ```
 
 ```{r}
-p1 <- vip::vip(rf_impurity, num_features = 10, bar = FALSE) + theme_bw()
-p2 <- vip::vip(rf_permute, num_features = 10, bar = FALSE) + theme_bw()
+p1 <- vip::vip(rf_impurity, num_features = 10, bar = FALSE,include_type=TRUE) + theme_bw()
+p2 <- vip::vip(rf_permute, num_features = 10, bar = FALSE,include_type=TRUE) + theme_bw()
 
 gridExtra::grid.arrange(p1, p2, nrow = 1)
 ```
@@ -150,17 +162,7 @@ confusionMatrix(table(pred_test$predictions, test1.1$essential))
 
 Specificity really low so very bad at recognising when a node is not lethal! But good at recognising that a node is lethal.
 
-
-# Using the random forest model
-
-```{r}
-library(randomForest)
-essential_rf <- randomForest(essential~.,data=data, importance=TRUE, proximity=TRUE)
-```
-
-```{r}
-essential_rf
-```
+Check ut our class imbalance:
 
 ```{r}
 counts = data %>%group_by(essential)%>%summarise(n=n())
@@ -169,16 +171,21 @@ counts = data %>%group_by(essential)%>%summarise(n=n())
  78% of data is nonlethal so we have a problem ! imbalanced data.
  
 ```{r}
-counts
+preds = pred_test$predictions
 ```
+
+
  
 ```{r}
-library(randomForest)
-essential_rf <- randomForest(essential~.,data=data, sampsize=c(500,500),importance=TRUE, proximity=TRUE)
+test1$predicted_lethality = preds
 ```
- 
 
 ```{r}
-essential_rf
+test1=test1%>%mutate(acc=(predicted_lethality==essential))
 ```
+
+```{r}
+write.csv(test1,'predicted_essential.csv')
+```
+
 
