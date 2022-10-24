@@ -252,3 +252,41 @@ Presentation caret package code from here: https://stackoverflow.com/questions/2
 ```
 
 
+```{r}
+homo_data = read.csv('network_measures.csv')
+```
+
+```{r}
+head(no_name)
+```
+```{r}
+no_name = homo_data%>%clean_names() %>% select(-x_name)%>%select(-essential)
+```
+
+
+```{r}
+pred_homo <- predict(rf_impurity, no_name) # type='response' is the default - used for classification
+
+```
+
+```{r}
+homo_preds = pred_homo$predictions
+```
+
+```{r}
+homo_data_predicted = homo_data
+homo_data_predicted$ess_pred = homo_preds
+```
+
+```{r}
+head(homo_data_predicted)
+```
+
+```{r}
+essential_homo_data = homo_data_predicted%>%filter(ess_pred==1)%>%select(X..Name)%>%rename(protein=X..Name)
+```
+
+```{r}
+essential_homo_list = write.csv(essential_homo_data,'essential_homo_proteins.csv')
+```
+
