@@ -1,0 +1,184 @@
+---
+title: "MATH3888_report"
+author: '500487424'
+date: "19/10/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(GGally)
+library(dplyr)
+library(tidyr)
+library(ranger)
+library(ggplot2)
+library(readr)
+library(rpart.plot) # for visual plots
+library(caret)
+```
+
+
+```{r}
+net_measures = read.csv('network_measures.csv')
+```
+
+```{r}
+head(net_measures)
+```
+```{r}
+predictors = net_measures %>%select(Eigenvector.Centrality, Betweenness.Centrality, Closeness.centrality, Degree)
+```
+
+```{r}
+ggpairs(predictors)
+```
+
+```{r}
+data=net_measures%>%select(-X..Name)%>%clean_names()%>%mutate(essential = ifelse(essential==" True",1,0))
+```
+
+```{r}
+data$essential = factor(data$essential)
+```
+
+
+```{r}
+set.seed(20833)
+tr_index = createDataPartition(data$essential)$Resample1
+train1 <- data[tr_index, ] 
+train1$essential <- factor(train1$essential)
+test1 <- data[-tr_index, ]
+test1$essential <- factor(test1$essential)
+head(test1)
+# train1.1 and test 1.1
+train1.1 <- train1 
+test1.1 <- test1
+
+n_features <- length(setdiff(names(data), "essential"))
+
+```
+
+```{r}
+lethal_fit <- ranger(
+  essential~.,
+  data = train1.1,
+  mtry = floor(n_features / 3),
+  respect.unordered.factors = "order",
+  seed = 123
+)
+# gets the OOB error
+prediction_error <- test_run$prediction.error
+prediction_error
+```
+
+```{r}
+hyper_grid <- expand.grid(
+  mtry = floor(n_features * c(.05, .15, .25, .333, .4)),
+  min.node.size = c(1, 3, 5), 
+  replace = c(TRUE, FALSE),
+  sample.fraction = c(.5, .63, .8),
+  error = NA
+)
+for (i in seq_len(nrow(hyper_grid))) {
+  fit <- ranger(
+    formula = essential ~ .,
+    data = train1.1, 
+    num.trees = n_features * 5,
+    mtry = hyper_grid$mtry[i],
+    min.node.size = hyper_grid$min.node.size[i],
+    replace = hyper_grid$replace[i],
+    sample.fraction = hyper_grid$sample.fraction[i],
+    verbose = FALSE,
+    seed = 123,
+    respect.unordered.factors = 'order',
+  )
+  
+  # export OOB error
+  hyper_grid$error[i] <- fit$prediction.error
+}
+hyper_grid %>%
+  arrange(error) %>%
+  head(10)
+```
+
+```{r}
+rf_impurity <- ranger(
+  formula = essential ~., 
+  data = train1.1,
+  num.trees = 2000,
+  mtry = 1,
+  min.node.size = 1,
+  sample.fraction = .50,
+  replace = FALSE,
+  importance = "impurity",
+  respect.unordered.factors = "order",
+  verbose = FALSE,
+  seed = 123
+)
+rf_permute <- ranger(
+  formula = essential ~., 
+  data = train1.1,
+  num.trees = 2000,
+  mtry = 1,
+  min.node.size = 1,
+  sample.fraction = .50,
+  replace = FALSE,
+  importance = "permutation",
+  respect.unordered.factors = "order",
+  verbose = FALSE,
+  seed = 123
+)
+```
+
+```{r}
+p1 <- vip::vip(rf_impurity, num_features = 10, bar = FALSE) + theme_bw()
+p2 <- vip::vip(rf_permute, num_features = 10, bar = FALSE) + theme_bw()
+
+gridExtra::grid.arrange(p1, p2, nrow = 1)
+```
+
+
+```{r}
+pred_test <- predict(rf_impurity, test1.1) # type='response' is the default - used for classification
+confusionMatrix(table(pred_test$predictions, test1.1$essential))
+```
+
+Specificity really low so very bad at recognising when a node is not lethal! But good at recognising that a node is lethal.
+
+
+# Using the random forest model
+
+```{r}
+library(randomForest)
+essential_rf <- randomForest(essential~.,data=data, importance=TRUE, proximity=TRUE)
+```
+
+```{r}
+essential_rf
+```
+
+```{r}
+counts = data %>%group_by(essential)%>%summarise(n=n())
+(counts$n)[1]/sum(counts$n)
+```
+ 78% of data is nonlethal so we have a problem ! imbalanced data.
+ 
+```{r}
+counts
+```
+ 
+```{r}
+library(randomForest)
+essential_rf <- randomForest(essential~.,data=data, sampsize=c(500,500),importance=TRUE, proximity=TRUE)
+```
+ 
+
+```{r}
+essential_rf
+```
+
