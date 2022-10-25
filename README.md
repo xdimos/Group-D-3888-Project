@@ -1,4 +1,4 @@
-# Math/BCMB3888-D: Yeast models of Glioblastoma 
+# Math/BCMB3888-D: Yeast models of Glioblastoma - Elden's branch
 
 This is Elden's branch of the Math3888 Group D GitHub. In this README I will briefly summarise the contents of each Jupyter notebook.
 
