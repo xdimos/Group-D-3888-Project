@@ -5,6 +5,7 @@ Hi there! This is the GitHub for Math3888 Group D. To see the most recent code, 
 Below, collapsed, are some old notes that were in the README. Read ahead if you are curious, but no cleaning up has been done here!
 <details>
   <summary>Old miscellaneous notes:</summary>
+  
 #### Proteins from Week 3 (Sunday):
 TP63 - tumour protein 63<br>
 associated with aggressive form of pancreatic cancer<br>
