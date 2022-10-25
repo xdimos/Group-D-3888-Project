@@ -1,18 +1,9 @@
-# Math/BCMB3888-D: Yeast models of colorectal cancers
+# Math/BCMB3888-D: Yeast Models of Glioblastoma - Yin En's branch
 
-Think of this as the "front page" for our project. As it grows we should fill out this page as a reference and a record of progress.
+This is Yin En's branch of the MATH3888 Group D GitHub. Each Jupyter notebook has been credited accordingly, but I will make a note of who provided the codes that I implemented. Many thanks to my mathematics colleagues for assisting me in modifying and debugging their codes - and in some cases, overhauling my sorry attempts at code and recoding something far more efficient (or something that simply works)!
 
-I apologise for the terrible state of my code...
+```Confidence Histogram (Coloured).ipynb``` contains code to represent our confidence cut-off. This was based on Elden's protein analysis code (which can be found as ```Protein Local Processing.ipynb``` in Elden's branch), with code modifications by Freya. My only contribution, as seen in the final code, was providing credit and modifying the colours for our group portfolio (in which a variant can be found on Page 32 of the group portfolio.
 
-## Aim
+```Protein Analysis ([Protein Code]).ipynb``` contains code to identify target proteins through community-finding and plotting the degree/subgraph centrality of our target proteins' communities to look for interesting outliers. This was based on Elden's protein analysis code (which can be found as ```Protein Local Processing.ipynb``` in Elden's branch), with minor modifications by myself and Elden. All codes are identical beyond the name of the target protein (and the results generated from that change), but ```Protein Analysis (YNL267W) - Final Code.ipynb``` is the cleaned version that will be of greater interest than other codes of this type.
 
-## Glossary
-
-The homologs of WRAP53 in yeast are RSA4 "YCR072C" and TAF5 "YBR198C".
-
-## Pretty Pictures
-Until we have anything else to put here, enjoy some pretty pictures :P
-
-<p align="center">
-  <img style="display: block; margin-left: auto; margin-right: auto; width: 75%;" alt="Neighbourhood of YCR072C, the WRAP53 homolog in yeast." src="https://user-images.githubusercontent.com/34012884/185737294-9e32ced4-31d7-4875-8ceb-0b99f2681cd3.png">
-</p>
+All other code in this branch is either transferred over from the main branch (at the time of the split) or are of trivial interest.
