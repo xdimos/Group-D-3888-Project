@@ -1,16 +1,11 @@
 # Math/BCMB3888-D: Yeast models of Glioblastoma 
 
-Think of this as the "front page" for our project. As it grows we should fill out this page as a reference and a record of progress.
+Hi there! This is the GitHub for Math3888 Group D. To see the most recent code, please look into our individual branches. To see a summary of our work, see <a href="https://docs.google.com/presentation/d/10yWDuJdLVMXSc8VqMo3EknxmUqFsEntwemUU93qqxVo/edit?usp=sharing">the group portfolio (slides)</a>, and our individual reports for more details. An appendix with some details on lethality and connectedness can be found <a href="https://drive.google.com/file/d/12mgjDRnQPLWyvswzkB67KawUfrPLBD9e/view?usp=sharing">here</a>.
 
-I apologise for the terrible state of my code...
-
-## Aim
-
-## Glossary and other info
-
-The homologs of WRAP53 in yeast are RSA4 "YCR072C" and TAF5 "YBR198C".
-
-#### Proteins from Week 3 (Sunday):
+Below, collapsed, are some old notes that were in the README. Read ahead if you are curious, but no cleaning up has been done here!
+<details>
+  <summary>Old miscellaneous notes:</summary>
+  #### Proteins from Week 3 (Sunday):
 TP63 - tumour protein 63<br>
 associated with aggressive form of pancreatic cancer<br>
 pancreatic ductal adenocarcinoma<br>
@@ -112,3 +107,6 @@ To find the identifier (e.g. "YBR247C") from the name ("ENP1") search the name i
   <img style="display: block; margin-left: auto; margin-right: auto; width: 50%;" alt="Log-log degree distribution for yeast." src="https://user-images.githubusercontent.com/34012884/186669141-8929599c-6a06-4d4d-9bef-7bf6832a6b65.png">
 </p>
 Looking for things to knock out we are therefore looking for relatively low degree nodes.
+</details>
+
+
